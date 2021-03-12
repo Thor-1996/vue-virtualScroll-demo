@@ -1,5 +1,5 @@
 {
-  "name": "my-vue-cli",
+  "name": "virtualScroll-demo",
   "version": "1.0.0",
   "description": "",
   "private": true,
@@ -35,5 +35,7 @@
     "webpack-cli": "3.3.12",
     "webpack-dev-server": "^3.11.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "virtual-scroll-vue": "^1.0.0"
+  }
 }
