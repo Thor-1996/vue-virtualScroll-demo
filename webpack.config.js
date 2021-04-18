@@ -1,6 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
-const resolve = (dir) => path.resolve(__dirname, dir);
+const resolve = dir => path.resolve(__dirname, dir);
 const HtmlWebpackPlugin = require("html-webpack-plugin"); //打包html的插件
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
@@ -12,16 +12,26 @@ const assetsDir = "static/";
 
 const config = {
   entry: {
-    page1: "./src/main.js",
+    page1: "./src/main.js"
   },
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: `${assetsDir}js/[name].[hash].js`,
-    chunkFilename: `${assetsDir}js/[name].chunk.[hash:8].js`,
+    chunkFilename: `${assetsDir}js/[name].chunk.[hash:8].js`
   },
   devServer: {
     hot: true,
     open: true,
+    proxy: {
+      "/api": {
+        target: "http://localhost:8081", // 代理目标的基础路径
+        changeOrigin: true, // 支持跨域
+        pathRewrite: {
+          // 重写路径: 去掉路径中开头的'/api'
+          "^/api": ""
+        }
+      }
+    }
   },
   module: {
     rules: [
@@ -31,28 +41,28 @@ const config = {
           loader: "thor-text-loader",
           options: {
             name: "xuexing",
-            age: 24,
-          },
-        },
+            age: 24
+          }
+        }
       },
       {
         test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: MiniCssExtractPlugin.loader
           },
-          "css-loader",
-        ],
+          "css-loader"
+        ]
       },
       {
         test: /\.less$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
+            loader: MiniCssExtractPlugin.loader
           },
           "css-loader",
-          "less-loader",
-        ],
+          "less-loader"
+        ]
       },
       {
         test: /\.(png|jpg|gif|jpeg|svg)$/,
@@ -62,10 +72,10 @@ const config = {
             options: {
               name: "[name].[hash:8].[ext]",
               outputPath: `${assetsDir}img`,
-              esModule: false,
-            },
-          },
-        ],
+              esModule: false
+            }
+          }
+        ]
       },
       {
         test: /\.html$/,
@@ -73,39 +83,39 @@ const config = {
           loader: "html-loader",
           options: {
             attrs: ["img:src"],
-            minimize: true,
-          },
-        },
+            minimize: true
+          }
+        }
       },
       {
         test: /\.vue$/,
-        loader: "vue-loader",
-      },
-    ],
+        loader: "vue-loader"
+      }
+    ]
   },
   resolve: {
     // 设置别名
     alias: {
-      "@": resolve("src"), // 这样配置后 @ 可以指向 src 目录
-    },
+      "@": resolve("src") // 这样配置后 @ 可以指向 src 目录
+    }
   },
   optimization: {
     minimize: true,
-    minimizer: [new CssMinimizerPlugin()],
+    minimizer: [new CssMinimizerPlugin()]
   },
   plugins: [
     new HtmlWebpackPlugin({
       filename: "index.html",
-      template: "pubilc/index.html",
+      template: "pubilc/index.html"
     }),
     new MiniCssExtractPlugin({
       filename: `${assetsDir}css/[name].chunk.[hash:8].css`,
-      chunkFilename: `${assetsDir}css/[id].chunk.[hash:8].css`,
+      chunkFilename: `${assetsDir}css/[id].chunk.[hash:8].css`
     }),
     new VueLoaderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new FileListPlugin(),
-  ],
+    new FileListPlugin()
+  ]
 };
 
 module.exports = (env, argv) => {
