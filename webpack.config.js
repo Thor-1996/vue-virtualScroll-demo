@@ -22,6 +22,7 @@ const config = {
   devServer: {
     hot: true,
     open: true,
+    port: 8087
   },
   module: {
     rules: [
