@@ -5,7 +5,7 @@
         <div class="list-item" v-for="item in currentList" :key="item">{{ item }}</div>
       </template>
     </virtual-scroll>
-    <video :src="src" controls></video>
+    <!-- <video :src="src" controls></video> -->
   </div>
 </template>
 
