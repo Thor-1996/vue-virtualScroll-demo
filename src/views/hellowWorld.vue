@@ -5,7 +5,7 @@
         <div class="list-item" v-for="item in currentList" :key="item">{{ item }}</div>
       </template>
     </virtual-scroll>
-    <video :src="src" controls></video>
+    <!-- <video :src="src" controls></video> -->
   </div>
 </template>
 
@@ -23,36 +23,35 @@ export default {
         "https://as.qunliao.info/2021/04/05/91394d66b52fab353ff7777c21510c9c51m9FN_q4.mp4"
     };
   },
-  mounted() {
-    return;
-    var m3u8ToMp4 = require("m3u8-to-mp4");
-    var converter = new m3u8ToMp4();
+  // mounted() {
+  //   var m3u8ToMp4 = require("m3u8-to-mp4");
+  //   var converter = new m3u8ToMp4();
 
-    (async function() {
-      await converter
-        .setInputFile("http://localhost:8081/sejie.m3u8")
-        .setOutputFile("dummy.mp4")
-        .start();
+  //   (async function() {
+  //     await converter
+  //       .setInputFile("http://localhost:8081/sejie.m3u8")
+  //       .setOutputFile("dummy.mp4")
+  //       .start();
 
-      console.log("File converted");
-    })();
+  //     console.log("File converted");
+  //   })();
 
-    // axios
-    //   .get("/api/sejie.m3u8", {
-    //     responseType: "blob"
-    //   })
-    //   .then(res => {
-    //     console.log(res);
-    //     var blob = new Blob([res]);
-    //     var url = URL.createObjectURL(blob);
+  //   // axios
+  //   //   .get("/api/sejie.m3u8", {
+  //   //     responseType: "blob"
+  //   //   })
+  //   //   .then(res => {
+  //   //     console.log(res);
+  //   //     var blob = new Blob([res]);
+  //   //     var url = URL.createObjectURL(blob);
 
-    //     setTimeout(() => {
-    //       // this.src = url;
-    //     }, 5000);
+  //   //     setTimeout(() => {
+  //   //       // this.src = url;
+  //   //     }, 5000);
 
-    //     console.log(url);
-    //   });
-  }
+  //   //     console.log(url);
+  //   //   });
+  // }
 };
 </script>
 
