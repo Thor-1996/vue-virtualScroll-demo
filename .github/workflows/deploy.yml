@@ -13,8 +13,8 @@ jobs:
     runs-on: ubuntu-latest # 使用ubuntu系统镜像运行自动化脚本
 
     strategy:
-    matrix:
-      node-version: [12.x]
+      matrix:
+        node-version: [12.x]
 
     steps: # 自动化步骤
       - uses: actions/checkout@v2 # 第一步，下载代码仓库
